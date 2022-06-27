@@ -1,0 +1,17 @@
+#cloud-config
+
+package_update: true
+
+packages:
+ - python3-pip
+
+runcmd:
+ - cd ~
+ - mkdir apps
+ - cd apps
+ - git clone https://github.com/akuckreja/hello_django.git
+ - cd hello_django
+ - pip install --quiet -r requirements.txt
+ - python3 manage.py migrate
+ - python3 manage.py runserver 0.0.0.0:8080
+
