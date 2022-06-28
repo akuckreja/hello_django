@@ -14,5 +14,5 @@ runcmd:
  - cd hello_django
  - pip install --quiet -r requirements.txt
  - python3 manage.py migrate
- - echo -e "@reboot azureuser python3 /apps/hello_django/manage.py runserver 0.0.0.0:8080 &\n" >> /etc/crontab
+ - echo "@reboot azureuser python3 /apps/hello_django/manage.py runserver 0.0.0.0:8080 &" >> /etc/crontab
 
