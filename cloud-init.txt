@@ -5,11 +5,17 @@ package_update: true
 packages:
  - python3-pip
 
+write_files:
+  - owner: root:root
+    path: /etc/crontab
+    content: @reboot azureuser python3 /apps/hello_django/manage.py runserver 0.0.0.0:8080 &
+
 runcmd:
  - cd ~
  - mkdir apps
  - cd apps
  - git clone https://github.com/akuckreja/hello_django.git
+ - sudo chmod 777 /~/apps/hello_django
  - cd hello_django
  - pip install --quiet -r requirements.txt
  - python3 manage.py migrate
