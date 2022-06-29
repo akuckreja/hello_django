@@ -53,11 +53,13 @@ echo "Address is http://$publicIp/"
  ```
 
 Create a network interface for the second virtual machine
-```  az network nic create \
+```
+az network nic create \
     --resource-group helloDjangoResourceGroup \
     --name hello_django-nic-02 \
     --vnet-name helloDjangoVNet \
-    --subnet helloDjangoBackEndSubnet ```
+    --subnet helloDjangoBackEndSubnet
+```
 
 Create the second virtual machine
 ```   az vm create \
@@ -67,9 +69,11 @@ Create the second virtual machine
     --admin-username azureuser \
     --generate-ssh-keys \
     --name hello_django-vm-02 \
-    --custom-data cloud-init.txt ```
+    --custom-data cloud-init.txt
+```
 
 Add the IP address of the second virtual machine for the backend pool for the application gateway
-``` address2=$(az network nic show --name hello_django-nic-02 --resource-group helloDjangoResourceGroup | grep "\"privateIpAddress\":" | grep -oE '[^ ]+$' | tr -d '",') ```
+``` address2=$(az network nic show --name hello_django-nic-02 --resource-group helloDjangoResourceGroup | grep "\"privateIpAddress\":" | grep -oE '[^ ]+$' | tr -d '",') 
 
-``` az network application-gateway address-pool update -g helloDjangoResourceGroup --gateway-name hello_django_app_gateway -n appGatewayBackendPool --add backendAddresses ipAddress=$address2 ```
+az network application-gateway address-pool update -g helloDjangoResourceGroup --gateway-name hello_django_app_gateway -n appGatewayBackendPool --add backendAddresses ipAddress=$address2
+```
